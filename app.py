@@ -2,20 +2,26 @@ from utilitarios import *
 
 cont_jogadas = 1
 
-# titulo('jogo da velha')
+titulo('jogo da velha')
+# sorteio_player()
+
 while True:
-    menu()
-    player01 = int(input(f'Escolha uma posição de 1 a 9 para fazer sua jogada\nou 0 para encerrar: '))
-    # print('\n' * 30)
-    if player01 == 0:
-        titulo('jogo encerrado !')
-        break
+
+    if cont_jogadas % 2 == 1:
+        menu()
+        player01 = int(input(f'Escolha uma posição de 1 a 9 para fazer sua jogada\nou 0 para encerrar: '))
+        if player01 == 0:
+            titulo('jogo encerrado !')
+            break
+        jogadas(player01)
+    else:
+        titulo('jogada do computador')
+        sleep(1.5)
+        jogada_comp()
+
     if cont_jogadas == 9:
+        exibe_tab()
         titulo('Empate. Deu velha !')
         break
     cont_jogadas += 1
-    # print(cont_jogadas)
-    jogadas(player01)
-    clear()
-
 
