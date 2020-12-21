@@ -14,9 +14,11 @@ while True:
             titulo('jogo encerrado !')
             break
         jogadas(player01)
+        vitoria()
+
     else:
         titulo('jogada do computador')
-        sleep(1.5)
+        sleep(1)
         jogada_comp()
 
     if cont_jogadas == 9:
