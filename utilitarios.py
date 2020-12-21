@@ -16,21 +16,21 @@ def titulo(texto):
 
 def sorteio_player():
     titulo('Vamos ver quem começa')
-    print('Sorteando')
-    sleep(1)
-    print('Sorteando.')
-    sleep(1)
-    print('Sorteando..')
-    sleep(1)
-    print('Sorteando...')
-    sleep(1)
+    print('Sorteando', end='')
+    sleep(0.5)
+    print('.', end='')
+    sleep(0.5)
+    print('.', end='')
+    sleep(0.5)
+    print('.')
+    sleep(0.5)
     player = randint(1, 2)
-    # print(player)
     if player == 1:
-        print('Você começa.'.center(24))
+        print('Você começa.')
     else:
-        print('Computador começa.'.center(24))
-        sleep(1.5)
+        print('Computador começa.')
+    linha()
+    return player
 
 
 def exibe_tab():
@@ -42,7 +42,7 @@ def exibe_tab():
 
 
 def menu():
-    print('COMO JOGAR:'.center(21))
+    print('COMO JOGAR'.center(24))
     print('Escolha uma posição de 1 \n'
           'a 9 para fazer sua jogada\n'
           'ou 0 (zero) para encerrar')
