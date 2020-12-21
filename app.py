@@ -6,7 +6,6 @@ titulo('jogo da velha')
 # sorteio_player()
 
 while True:
-    # print(f'Rodada: {cont_jogadas}')
     if cont_jogadas % 2 == 1:
         menu()
         if jogadas() == 0:
@@ -20,10 +19,12 @@ while True:
 
     if vitoria() == 1:
         titulo('fim de jogo')
+        exibe_tab()
         if cont_jogadas % 2 == 1:
-            print('O jogador X ganhou')
+            print(f'O jogador "X" ganhou com {cont_jogadas} rodadas.')
         else:
-            print('O jogador O ganhou')
+            print(f'O jogador "O" ganhou com {cont_jogadas} rodadas.')
+        linha()
         break
 
     if cont_jogadas == 9:
