@@ -48,5 +48,3 @@ while True:
         exibe_tab()
         break
     cont_jogadas += 1
-
-
