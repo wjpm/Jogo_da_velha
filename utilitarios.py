@@ -1,9 +1,17 @@
 from random import randint
 from time import sleep
 
-
 tab = [['', '', ''], ['', '', ''], ['', '', '']]
 tab_vit = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+tab_pos_vit = [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9],  # linhas
+               [1, 4, 7],
+               [2, 5, 8],
+               [3, 6, 9],  # Colunas
+               [1, 5, 9],
+               [3, 5, 7]  # Diagonais
+               ]
 
 
 def linha():
@@ -19,13 +27,13 @@ def titulo(texto):
 def sorteio_player():
     titulo('Vamos ver quem começa')
     print('Sorteando', end='')
-    sleep(0.5)
+    sleep(0.4)
     print('.', end='')
-    sleep(0.5)
+    sleep(0.4)
     print('.', end='')
-    sleep(0.5)
+    sleep(0.4)
     print('.')
-    sleep(0.5)
+    sleep(0.4)
     player = randint(1, 2)
     if player == 1:
         print('Você começa.')
@@ -93,7 +101,7 @@ def jogadas():
         return 0
 
 
-def jogada_comp(rod=0):
+def jogada_comp():
     posicoes = [
         None,
         (0, 0),  # 1
@@ -106,19 +114,21 @@ def jogada_comp(rod=0):
         (2, 1),  # 8
         (2, 2)  # 9
     ]
+    jogadaPC = randint(1, 9)
+    while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
+        jogadaPC = randint(1, 9)
+    tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
+    tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
+    exibe_tab()
 
-    for l in range(3):
-        somaLinha = tab_vit[l][0] + tab_vit[l][1] + tab_vit[l][2]
-        if somaLinha == 2 and tab[posicoes[l][0]][posicoes[l][1]] != '':
-            tab[posicoes[l][0]][posicoes[l][1]] = 'O'
-            tab_vit[posicoes[l][0]][posicoes[l][1]] = -1
-        else:
-            jogadaPC = randint(1, 9)
-            while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
-                jogadaPC = randint(1, 9)
-            tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
-            tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
-            exibe_tab()
+
+def verifica_posicao():
+    for i in tab_pos_vit:
+        p1 = tab_pos_vit.index(i)
+        for j in i:
+            if j != 1 or j != -1:
+                p2 = tab_pos_vit[p1].index(j)
+                print(p1, p2)
 
 
 def vitoria():
@@ -142,7 +152,25 @@ def vitoria():
     return 0
 
 
+def jogada_comp_velho():
+    posicoes = [
+        None,
+        (0, 0),  # 1
+        (0, 1),  # 2
+        (0, 2),  # 3
+        (1, 0),  # 4
+        (1, 1),  # 5
+        (1, 2),  # 6
+        (2, 0),  # 7
+        (2, 1),  # 8
+        (2, 2)  # 9
+    ]
+    jogadaPC = randint(1, 9)
+    while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
+        jogadaPC = randint(1, 9)
+    tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
+    tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
+    exibe_tab()
 
 
-
-
+verifica_posicao()

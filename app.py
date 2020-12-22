@@ -6,7 +6,7 @@ titulo('jogo da velha')
 player_inicial = sorteio_player()
 
 while True:
-    print(f'Rodada: {cont_jogadas}')
+    # print(f'Rodada: {cont_jogadas}')
     if player_inicial == 1:
         if cont_jogadas % 2 == 1:
             menu()
@@ -16,13 +16,13 @@ while True:
         else:
             titulo('jogada do computador')
             sleep(1)
-            jogada_comp(cont_jogadas)
+            jogada_comp()
 
     if player_inicial == 2:
         if cont_jogadas % 2 == 1:
             titulo('jogada do computador')
             sleep(1)
-            jogada_comp(cont_jogadas)
+            jogada_comp()
         else:
             menu()
             if jogadas() == 0:
