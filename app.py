@@ -6,6 +6,7 @@ titulo('jogo da velha')
 player_inicial = sorteio_player()
 
 while True:
+    print(f'Rodada: {cont_jogadas}')
     if player_inicial == 1:
         if cont_jogadas % 2 == 1:
             menu()
@@ -15,13 +16,13 @@ while True:
         else:
             titulo('jogada do computador')
             sleep(1)
-            jogada_comp()
+            jogada_comp(cont_jogadas)
 
     if player_inicial == 2:
         if cont_jogadas % 2 == 1:
             titulo('jogada do computador')
             sleep(1)
-            jogada_comp()
+            jogada_comp(cont_jogadas)
         else:
             menu()
             if jogadas() == 0:
@@ -29,22 +30,28 @@ while True:
             exibe_tab()
 
     if vitoria() == 1:
+        print()
         titulo('fim de jogo')
-        exibe_tab()
         if player_inicial == 1:
             if cont_jogadas % 2 == 1:
-                print(f'O jogador "X" ganhou com {cont_jogadas} rodadas.')
+                print(f'\033[32mO jogador "X" ganhou!!!\033[m\n-> Jogadas {cont_jogadas} rodadas.')
+            else:
+                print(f'\033[32mO jogador "O" ganhou!!!\033[m\n-> Jogadas {cont_jogadas} rodadas.')
+            exibe_tab()
             linha()
             break
 
         if player_inicial == 2:
             if cont_jogadas % 2 == 1:
-                print(f'O jogador "O" ganhou com {cont_jogadas} rodadas.')
+                print(f'\033[32mO jogador "O" ganhou!!!\033[m\n-> Jogadas {cont_jogadas} rodadas.')
+            else:
+                print(f'\033[32mO jogador "X" ganhou!!!\033[m\n-> Jogadas {cont_jogadas} rodadas.')
+            exibe_tab()
             linha()
             break
 
     if cont_jogadas == 9:
-        titulo('Empate. Deu velha !')
+        titulo('## Empate. Deu velha! ##')
         exibe_tab()
         break
     cont_jogadas += 1

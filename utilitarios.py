@@ -1,5 +1,7 @@
 from random import randint
 from time import sleep
+
+
 tab = [['', '', ''], ['', '', ''], ['', '', '']]
 tab_vit = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
@@ -91,7 +93,7 @@ def jogadas():
         return 0
 
 
-def jogada_comp():
+def jogada_comp(rod=0):
     posicoes = [
         None,
         (0, 0),  # 1
@@ -104,12 +106,19 @@ def jogada_comp():
         (2, 1),  # 8
         (2, 2)  # 9
     ]
-    jogadaPC = randint(1, 9)
-    while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
-        jogadaPC = randint(1, 9)
-    tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
-    tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
-    exibe_tab()
+
+    for l in range(3):
+        somaLinha = tab_vit[l][0] + tab_vit[l][1] + tab_vit[l][2]
+        if somaLinha == 2 and tab[posicoes[l][0]][posicoes[l][1]] != '':
+            tab[posicoes[l][0]][posicoes[l][1]] = 'O'
+            tab_vit[posicoes[l][0]][posicoes[l][1]] = -1
+        else:
+            jogadaPC = randint(1, 9)
+            while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
+                jogadaPC = randint(1, 9)
+            tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
+            tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
+            exibe_tab()
 
 
 def vitoria():
