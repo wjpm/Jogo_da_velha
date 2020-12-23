@@ -146,6 +146,33 @@ def verifica_posicao():
                             tab[p2][coluna_perigo] = 'O'
                             tab_pts[p2][coluna_perigo] = -1
                             return defesa_c
+    if tab_pts[0][0] + tab_pts[1][1] + tab_pts[2][2] == 2:
+        if tab_pts[0][0] == 0:
+            tab_pts[0][0] = -1
+            tab[0][0] = 'O'
+
+        if tab_pts[1][1] == 0:
+            tab_pts[1][1] = -1
+            tab[1][1] = 'O'
+
+        if tab_pts[2][2] == 0:
+            tab_pts[2][2] = -1
+            tab[2][2] = 'O'
+        return True
+
+    if tab_pts[0][2] + tab_pts[1][1] + tab_pts[2][0] == 2:
+        if tab_pts[0][2] == 0:
+            tab_pts[0][2] = -1
+            tab[0][2] = 'O'
+
+        if tab_pts[1][1] == 0:
+            tab_pts[1][1] = -1
+            tab[1][1] = 'O'
+
+        if tab_pts[2][0] == 0:
+            tab_pts[2][0] = -1
+            tab[2][0] = 'O'
+        return True
 
 
 def vitoria():  # mensagens de vitoria aqui dentro
