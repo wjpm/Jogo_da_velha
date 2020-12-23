@@ -93,7 +93,9 @@ def jogadas():
 
 
 def jogada_comp():
-    if verifica_posicao():
+    if verifica_posicao_ataque():
+        pass
+    elif verifica_posicao_defesa():
         pass
     else:
         posicoes = [
@@ -116,7 +118,7 @@ def jogada_comp():
         exibe_tab()
 
 
-def verifica_posicao():
+def verifica_posicao_defesa():
     # Defesa linha
     for l in range(3):
         soma_linha = tab_pts[l][0] + tab_pts[l][1] + tab_pts[l][2]
@@ -132,6 +134,7 @@ def verifica_posicao():
                             tab[linha_perigo][p2] = 'O'
                             tab_pts[linha_perigo][p2] = -1
                             return defesa_l
+    # Defesa coluna
     for c in range(3):
         soma_coluna = tab_pts[0][c] + tab_pts[1][c] + tab_pts[2][c]
         if soma_coluna == 2:
@@ -146,15 +149,14 @@ def verifica_posicao():
                             tab[p2][coluna_perigo] = 'O'
                             tab_pts[p2][coluna_perigo] = -1
                             return defesa_c
+    # Defesa diagonais
     if tab_pts[0][0] + tab_pts[1][1] + tab_pts[2][2] == 2:
         if tab_pts[0][0] == 0:
             tab_pts[0][0] = -1
             tab[0][0] = 'O'
-
         if tab_pts[1][1] == 0:
             tab_pts[1][1] = -1
             tab[1][1] = 'O'
-
         if tab_pts[2][2] == 0:
             tab_pts[2][2] = -1
             tab[2][2] = 'O'
@@ -164,18 +166,73 @@ def verifica_posicao():
         if tab_pts[0][2] == 0:
             tab_pts[0][2] = -1
             tab[0][2] = 'O'
-
         if tab_pts[1][1] == 0:
             tab_pts[1][1] = -1
             tab[1][1] = 'O'
-
         if tab_pts[2][0] == 0:
             tab_pts[2][0] = -1
             tab[2][0] = 'O'
         return True
 
 
-def vitoria():  # mensagens de vitoria aqui dentro
+def verifica_posicao_ataque():
+    # Ataque linha
+    for l in range(3):
+        soma_linha = tab_pts[l][0] + tab_pts[l][1] + tab_pts[l][2]
+        if soma_linha == -2:
+            linha_atk = l
+            for i in tab_pts:
+                p1 = tab_pts.index(i)
+                for j in i:
+                    p2 = tab_pts[p1].index(j)
+                    if soma_linha == -2:
+                        linha_a = tab_pts[linha_atk][p2] == 0
+                        if linha_a:
+                            tab[linha_atk][p2] = 'O'
+                            tab_pts[linha_atk][p2] = -1
+                            return linha_a
+    # Ataque coluna
+    for c in range(3):
+        soma_coluna = tab_pts[0][c] + tab_pts[1][c] + tab_pts[2][c]
+        if soma_coluna == -2:
+            coluna_atk = c
+            for i in tab_pts:
+                p1 = tab_pts.index(i)
+                for j in i:
+                    p2 = tab_pts[p1].index(j)
+                    if soma_coluna == -2:
+                        ataque_c = tab_pts[p2][coluna_atk] == 0
+                        if ataque_c:
+                            tab[p2][coluna_atk] = 'O'
+                            tab_pts[p2][coluna_atk] = -1
+                            return ataque_c
+    # Ataque diagonais
+    if tab_pts[0][0] + tab_pts[1][1] + tab_pts[2][2] == -2:
+        if tab_pts[0][0] == 0:
+            tab_pts[0][0] = -1
+            tab[0][0] = 'O'
+        if tab_pts[1][1] == 0:
+            tab_pts[1][1] = -1
+            tab[1][1] = 'O'
+        if tab_pts[2][2] == 0:
+            tab_pts[2][2] = -1
+            tab[2][2] = 'O'
+        return True
+
+    if tab_pts[0][2] + tab_pts[1][1] + tab_pts[2][0] == -2:
+        if tab_pts[0][2] == 0:
+            tab_pts[0][2] = -1
+            tab[0][2] = 'O'
+        if tab_pts[1][1] == 0:
+            tab_pts[1][1] = -1
+            tab[1][1] = 'O'
+        if tab_pts[2][0] == 0:
+            tab_pts[2][0] = -1
+            tab[2][0] = 'O'
+        return True
+
+
+def vitoria():  # colocar mensagens de vitoria aqui dentro
     # Verificando linhas
     for l in range(3):
         soma_linha = tab_pts[l][0] + tab_pts[l][1] + tab_pts[l][2]

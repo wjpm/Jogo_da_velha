@@ -50,7 +50,7 @@ while True:
             break
 
     if cont_jogadas == 9:
-        titulo('\033[33m## Empate. Deu velha! ##\033[m')
+        titulo('## Empate. Deu velha! ##')
         exibe_tab()
         break
     cont_jogadas += 1
