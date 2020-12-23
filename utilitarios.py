@@ -2,16 +2,7 @@ from random import randint
 from time import sleep
 
 tab = [['', '', ''], ['', '', ''], ['', '', '']]
-tab_vit = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-tab_pos_vit = [[1, 2, 3],
-               [4, 5, 6],
-               [7, 8, 9],  # linhas
-               [1, 4, 7],
-               [2, 5, 8],
-               [3, 6, 9],  # Colunas
-               [1, 5, 9],
-               [3, 5, 7]  # Diagonais
-               ]
+tab_pts = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 
 def linha():
@@ -90,10 +81,10 @@ def jogadas():
             print('\033[31mPosição ocupada, jogue novamente: \033[m', end='')
             jogador = int(input())
             if tab[posicoes[jogador][0]][posicoes[jogador][1]] == '':
-                tab_vit[posicoes[jogador][0]][posicoes[jogador][1]] = 1
+                tab_pts[posicoes[jogador][0]][posicoes[jogador][1]] = 1
                 break
         tab[posicoes[jogador][0]][posicoes[jogador][1]] = 'X'
-        tab_vit[posicoes[jogador][0]][posicoes[jogador][1]] = 1
+        tab_pts[posicoes[jogador][0]][posicoes[jogador][1]] = 1
     except (ValueError, IndexError) as err:
         linha()
         print('\033[31mVALOR INVALIDO.\nRecomece o jogo e observe\nas instruções.\033[m')
@@ -102,51 +93,77 @@ def jogadas():
 
 
 def jogada_comp():
-    posicoes = [
-        None,
-        (0, 0),  # 1
-        (0, 1),  # 2
-        (0, 2),  # 3
-        (1, 0),  # 4
-        (1, 1),  # 5
-        (1, 2),  # 6
-        (2, 0),  # 7
-        (2, 1),  # 8
-        (2, 2)  # 9
-    ]
-    jogadaPC = randint(1, 9)
-    while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
+    if verifica_posicao():
+        pass
+    else:
+        posicoes = [
+            None,
+            (0, 0),  # 1
+            (0, 1),  # 2
+            (0, 2),  # 3
+            (1, 0),  # 4
+            (1, 1),  # 5
+            (1, 2),  # 6
+            (2, 0),  # 7
+            (2, 1),  # 8
+            (2, 2)  # 9
+        ]
         jogadaPC = randint(1, 9)
-    tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
-    tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
-    exibe_tab()
+        while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
+            jogadaPC = randint(1, 9)
+        tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
+        tab_pts[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
+        exibe_tab()
 
 
 def verifica_posicao():
-    for i in tab_pos_vit:
-        p1 = tab_pos_vit.index(i)
-        for j in i:
-            if j != 1 or j != -1:
-                p2 = tab_pos_vit[p1].index(j)
-                print(p1, p2)
+    # Defesa linha
+    for l in range(3):
+        soma_linha = tab_pts[l][0] + tab_pts[l][1] + tab_pts[l][2]
+        if soma_linha == 2:
+            linha_perigo = l
+            for i in tab_pts:
+                p1 = tab_pts.index(i)
+                for j in i:
+                    p2 = tab_pts[p1].index(j)
+                    if soma_linha == 2:
+                        defesa_l = tab_pts[linha_perigo][p2] == 0
+                        if defesa_l:
+                            tab[linha_perigo][p2] = 'O'
+                            tab_pts[linha_perigo][p2] = -1
+                            return defesa_l
+    for c in range(3):
+        soma_coluna = tab_pts[0][c] + tab_pts[1][c] + tab_pts[2][c]
+        if soma_coluna == 2:
+            coluna_perigo = c
+            for i in tab_pts:
+                p1 = tab_pts.index(i)
+                for j in i:
+                    p2 = tab_pts[p1].index(j)
+                    if soma_coluna == 2:
+                        defesa_c = tab_pts[p2][coluna_perigo] == 0
+                        if defesa_c:
+                            tab[p2][coluna_perigo] = 'O'
+                            tab_pts[p2][coluna_perigo] = -1
+                            return defesa_c
 
 
-def vitoria():
+def vitoria():  # mensagens de vitoria aqui dentro
     # Verificando linhas
     for l in range(3):
-        soma_linha = tab_vit[l][0] + tab_vit[l][1] + tab_vit[l][2]
+        soma_linha = tab_pts[l][0] + tab_pts[l][1] + tab_pts[l][2]
         if soma_linha == 3 or soma_linha == -3:
             return 1
 
     # Verifica colunas
     for c in range(3):
-        soma_culuna = tab_vit[0][c] + tab_vit[1][c] + tab_vit[2][c]
+        soma_culuna = tab_pts[0][c] + tab_pts[1][c] + tab_pts[2][c]
         if soma_culuna == 3 or soma_culuna == -3:
             return 1
 
     # Verifica diagonais
-    soma_diag1 = tab_vit[0][0] + tab_vit[1][1] + tab_vit[2][2]
-    soma_diag2 = tab_vit[0][2] + tab_vit[1][1] + tab_vit[2][0]
+    soma_diag1 = tab_pts[0][0] + tab_pts[1][1] + tab_pts[2][2]
+    soma_diag2 = tab_pts[0][2] + tab_pts[1][1] + tab_pts[2][0]
     if soma_diag1 == 3 or soma_diag1 == -3 or soma_diag2 == 3 or soma_diag2 == -3:
         return 1
     return 0
@@ -169,8 +186,5 @@ def jogada_comp_velho():
     while tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] != '':
         jogadaPC = randint(1, 9)
     tab[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = 'O'
-    tab_vit[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
+    tab_pts[posicoes[jogadaPC][0]][posicoes[jogadaPC][1]] = -1
     exibe_tab()
-
-
-verifica_posicao()

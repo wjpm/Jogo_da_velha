@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="32c60fe8-4d24-4562-a11e-862889d0c326" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilitarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilitarios.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +29,7 @@
     <property name="last_opened_file_path" value="$USER_HOME$/Curso-Geek---Python-iniciante---Udemy--git-" />
     <property name="settings.editor.selected.configurable" value="proofread" />
   </component>
-  <component name="RunManager" selected="Python.utilitarios">
+  <component name="RunManager" selected="Python.app">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Jogo_da_velha" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,8 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.utilitarios" />
         <item itemvalue="Python.app" />
+        <item itemvalue="Python.utilitarios" />
       </list>
     </recent_temporary>
   </component>

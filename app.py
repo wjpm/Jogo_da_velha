@@ -6,7 +6,6 @@ titulo('jogo da velha')
 player_inicial = sorteio_player()
 
 while True:
-    # print(f'Rodada: {cont_jogadas}')
     if player_inicial == 1:
         if cont_jogadas % 2 == 1:
             menu()
@@ -51,7 +50,7 @@ while True:
             break
 
     if cont_jogadas == 9:
-        titulo('## Empate. Deu velha! ##')
+        titulo('\033[33m## Empate. Deu velha! ##\033[m')
         exibe_tab()
         break
     cont_jogadas += 1
